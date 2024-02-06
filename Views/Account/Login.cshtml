@@ -1,0 +1,10 @@
+﻿@model LoginViewModel
+<form asp-action="Login" id="userLoginForm" method="post">
+    <div asp-validation-summary="All"></div>
+
+    <label asp-for="UserName" >username</label><br />
+    <input asp-for="UserName" id="formInput" placeholder="enter username..." /><br />
+    <label asp-for="Password">password</label><br />
+    <input asp-for="Password" type="password" id="formInput" placeholder="enter password..." /><br />
+    <button type="submit" id="loginFormSubmissionButtons">Login</button>
+</form>

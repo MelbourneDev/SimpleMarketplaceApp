@@ -1,0 +1,45 @@
+﻿@model CatalogueViewModel
+
+<div class="container">
+    <div class="row">
+        <!-- Categories Sidebar -->
+        <div class="col-md-2">
+            <h3>Categories</h3>
+            <ul class="list-group">
+                @foreach (var category in Model.Categories)
+                {
+                    <li class="list-group-item">
+                        <a href="javascript:void(0);" onclick="loadItems(@category.categoryId)">
+                            @category.categoryName
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Items Grid -->
+        <div class="col-md-10" id="itemsGrid">
+            <!-- Initially load the items grid with server-side rendered items -->
+            @Html.Partial("_ItemsGrid", Model.Items)
+        </div>
+    </div>
+</div>
+
+<script>
+    function loadItems(categoryId) {
+        let url = '@Url.Action("GetItemsByCategory", "Catalogue")';
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: { categoryId: categoryId },
+            success: function (response) {
+                $('#itemsGrid').html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error:", status, error);
+            }
+        });
+    }
+</script>
+
+

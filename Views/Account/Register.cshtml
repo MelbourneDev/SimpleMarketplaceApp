@@ -1,0 +1,48 @@
+﻿@model RegisterViewModel
+
+
+
+<div class="registrationPageGrid">
+        <form asp-action="Register" method="post" id="userRegisterForm">
+            <div asp-validation-summary="All"></div>
+            <label asp-for="UserName" >username</label>
+            <br />
+            <input asp-for="UserName" id="formInput" type="text" placeholder="enter username..." />   
+            <span asp-validation-for="UserName"></span>
+            <br />
+            <label asp-for="Email">email</label>   
+            <br />
+            <input asp-for="Email" id="formInput" type="email" placeholder="enter email..." />
+            <span asp-validation-for="Email"></span>
+            <br />
+            <label asp-for="Password">password</label>
+            <br />
+            <input asp-for="Password" id="formInput" type="password" placeholder="enter password..." />
+            <span asp-validation-for="Password"></span>
+            <br />
+            <label asp-for="ConfirmPassword">confirm password</label> 
+            <br />
+            <input asp-for="ConfirmPassword" id="formInput" type="password" placeholder="confirm password..." />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <br />
+            <label asp-for="Age">age</label>  
+            <br />
+            <input asp-for="Age" id="formInput" type="number" placeholder="enter age..." />
+            <span asp-validation-for="Age" placeholder="enter age"></span>
+            <br /><br />
+
+            <button type="submit" id="formSubmissionButtons">Register</button>
+        </form>
+        <div class="validationHelp">
+            <h1>fill in the form to register</h1>
+            <br />
+            <p>username and email must be unique</p>
+            <p>passwords must contain:
+            <ul><li>at least 6 characters.</li></ul>
+            <ul><li>at least one non alphanumeric character.</li></ul>
+            <ul><li>at least one digit ('0'-'9').</li></ul>
+            <ul><li>at least one uppcase ('A'-'Z').</li></ul>
+            <p>users must be minumum age of 16 to use this site</p>
+        </div>
+
+</div>

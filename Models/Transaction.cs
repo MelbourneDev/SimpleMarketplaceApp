@@ -9,10 +9,10 @@ namespace SimpleMarketplaceApp.Models
         public int transactionID { get; set; }
 
         [ForeignKey("Buyer")]
-        public int buyerId { get; set; }
+        public string buyerId { get; set; }
 
         [ForeignKey("Seller")]
-        public int sellerId { get; set; }
+        public string sellerId { get; set; }
 
         [ForeignKey("Item")]
         public int itemId { get; set; }

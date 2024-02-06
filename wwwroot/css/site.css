@@ -1,22 +1,150 @@
-html {
-  font-size: 14px;
-}
+    html {
+        font-size: 14px;
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+    }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+    header {
+        background: #DDDDDF;
+    }
+    @media (min-width: 768px) {
 
-html {
-  position: relative;
-  min-height: 100%;
-}
 
-body {
-  margin-bottom: 60px;
+      html {
+        font-size: 16px;
+      }
+    }
+
+
+    html {
+      position: relative;
+      min-height: 100%;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        margin-bottom: 60px;
+        background: #DDDDDF;
+        font-family: "Poppins", sans-serif;
+    }
+
+@media screen and (min-width: 1920px) {
+
+    /*Registration Page*/
+    .registrationPageGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .1em;
+        
+    }
+
+    #userRegisterForm {
+        width: 65%;
+        margin: 0 auto;
+        margin-top: 5em;
+        text-align: center;
+        padding: 1em;
+        font-size: 1.5em;
+        font-weight: 400;
+        background: white;
+        border-style: solid;
+        border-width: .1em;
+        border-radius: 5%;
+        box-shadow: .5em .5em 0px 0px #a0a0a0;
+    }
+ 
+
+    #formInput {
+        padding: .1em;
+        margin: .1em;
+        margin-bottom: .5em;
+        font-weight: 200;
+        background: white;
+        border-radius: 5%;
+        border-style: solid;
+        border-width: .1em;
+        border-color: #CCCCCC;
+        box-shadow: .1em .1em 0px 0px #a0a0a0;
+        outline: none;
+    }
+
+    input::placeholder {
+        color: #999;
+        font-style: italic;
+        font-size: .85em;
+        padding: .3em;
+    }
+
+    #formSubmissionButtons {
+        width: 11em;
+        border-radius: 5%;
+        border-style: solid;
+        border-width: .1em;
+        border-color: #CCCCCC;
+        box-shadow: .1em .1em 0px 0px #a0a0a0;
+    }
+
+        #formSubmissionButtons:active {
+            transform: translateY(2px); 
+        }
+
+    .validationHelp {
+        height: 30em;
+        width: 60%;
+        margin: 0 auto;
+        margin-top: 10em;
+        text-align: center;
+        padding: 1em;
+        background: rgba(255, 255, 255, 0.5);
+        border-style: solid;
+        border-width: .1em;
+        border-radius: 5%;
+        box-shadow: .5em .5em 0px 0px #a0a0a0;
+    }
+
+        .validationHelp h1 {
+        font-size:1.2em;
+        font-weight:400;
+        
+    }
+
+        .validationHelp ul{
+            text-align:left;
+        }
+
+
+/*Login Form Page*/
+
+
+    #userLoginForm {
+        width:35%;
+        margin: 0 auto;
+        margin-top: 5em;
+        text-align: center;
+        padding: 1em;
+        font-size: 1.5em;
+        font-weight: 400;
+        background: white;
+        border-style: solid;
+        border-width: .1em;
+        border-radius: 5%;
+        box-shadow: .5em .5em 0px 0px #a0a0a0;
+    }
+
+
+    #loginFormSubmissionButtons {
+        width: 11em;
+        margin-top: .2em;
+        border-radius: 5%;
+        border-style: solid;
+        border-width: .1em;
+        border-color: #CCCCCC;
+        box-shadow: .1em .1em 0px 0px #a0a0a0;
+    }
+
+        #loginFormSubmissionButtons:active {
+            transform: translateY(2px);
+        }
+ 
+
+    /*End of Media Query 1920px > */
 }

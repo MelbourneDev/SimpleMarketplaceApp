@@ -1,0 +1,22 @@
+﻿@model List<SimpleMarketplaceApp.Models.Item>
+
+<div class="row">
+@foreach (var item in Model)
+{
+    <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+            <img src="@item.ItemImages?.FirstOrDefault()?.imageURL" class="card-img-top" alt="Item Image">
+            <div class="card-body">
+                <h5 class="card-title">@item.Title</h5>
+                <p class="card-text">$@item.ItemPrice</p>
+                <p class="card-text">Listed: @item.DateListed.ToString("yyyy-MM-dd")</p>
+                <p class="card-text">Seller: @item.User.UserName</p>
+            </div>
+        </div>
+    </div>
+@if ((Model.IndexOf(item) + 1) % 3 == 0)
+{
+    @:</div><div class="row">
+}
+}
+</div>

@@ -1,0 +1,102 @@
+﻿@model UserDashboardViewModel
+
+
+    <h2>User Dashboard</h2>
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="#currentListings">Current Listings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#pastListings">Past Listings</a>           
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="currentListings" class="container tab-pane active">
+            <!-- Current Listings Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Date Listed</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CurrentListings)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.Description</td>                        
+                            <td>
+                            @item.Category?.categoryName
+                            </td>
+                            <td>@item.ItemPrice</td>
+                            <td>@item.DateListed</td>
+                            <td>@(item.IsActive ? "Item Listed" : "Item Pending")</td>
+
+                            <td>
+                                <a asp-action="EditListing" asp-route-itemId="@item.itemId">Edit</a> |
+                                <a asp-action="RemoveListing" asp-route-itemId="@item.itemId">Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="pastListings" class="container tab-pane fade">
+            <!-- Past Listings Table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Date Listed</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PastListings)
+                    {
+                        
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.Description</td>
+                            <td>@item.CategoryId</td>
+                            <td>@item.ItemPrice</td>
+                            <td>@item.DateListed</td>
+                            <td>
+                                <a asp-action="ReinstateListing" asp-route-itemId="@item.itemId">Reinstate</a> |
+                                <a asp-action="PermanentlyDeleteListing" asp-route-itemId="@item.itemId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+<script>
+    window.onload = function () {
+        var activeTab = '@TempData["ActiveTab"]';
+        if (!activeTab) {
+            activeTab = 'currentListings';
+        }
+        openTab(activeTab);
+    };
+
+    function openTab(tabName) {
+        // Logic to activate the tab with the name in tabName
+        // For example, using Bootstrap's tab('show') method
+        $('.nav-tabs a[href="#' + tabName + '"]').tab('show');
+    }
+</script>

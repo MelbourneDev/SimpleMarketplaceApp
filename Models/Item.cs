@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SimpleMarketplaceApp.Models
@@ -11,7 +12,7 @@ namespace SimpleMarketplaceApp.Models
 
         // Assuming the primary key of User is an int
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string? UserId { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -19,18 +20,27 @@ namespace SimpleMarketplaceApp.Models
         [Required]
         public string Description { get; set; }
 
-        // Make sure the type matches the primary key type in Category
+        
         [ForeignKey("Category")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
+
+        [Required]
+        public int ItemPrice { get; set; }
 
         public DateTime DateListed { get; set; }
 
+        public bool IsPastListing { get; set; } = false;
+
+        public bool IsActive { get; set; } = false;
+
         // Navigation properties
+
         public virtual User User { get; set; }
+       
         public virtual Category Category { get; set; }
         public virtual ICollection<ItemImage>? ItemImages { get; set; }
 
-        public ApprovalStatus Status { get; set; }
+        public ApprovalStatus Status { get; set; } = ApprovalStatus.Pending; // Default
     }
 
     public enum ApprovalStatus
