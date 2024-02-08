@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SimpleMarketplaceApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13df757d56006c91f5aff81447f2d8fc614512ca")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62763e8ba91f25adf18f7cb30a9a4b6400d0ced3")]
 [assembly: System.Reflection.AssemblyProductAttribute("SimpleMarketplaceApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SimpleMarketplaceApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

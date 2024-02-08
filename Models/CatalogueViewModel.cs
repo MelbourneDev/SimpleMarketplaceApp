@@ -6,5 +6,6 @@ namespace SimpleMarketplaceApp.Models
 
         public List<Category> Categories { get; set; }
         public List<Item> Items { get; set; }
+        public string SelectedCategoryName { get; set; }
     }
 }

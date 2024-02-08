@@ -42,6 +42,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0YWxvZ3VlXENhdGFsb2d1ZURhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/matth/OneDrive/Desktop/.NET apps/simple-marketplace-app/SimpleMarketplaceApp/SimpleMarketplaceApp/Views/Catalogue/ItemDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0YWxvZ3VlXEl0ZW1EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/matth/OneDrive/Desktop/.NET apps/simple-marketplace-app/SimpleMarketplaceApp/SimpleMarketplaceApp/Views/Catalogue/_ItemsGrid.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0YWxvZ3VlXF9JdGVtc0dyaWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -68,6 +72,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/matth/OneDrive/Desktop/.NET apps/simple-marketplace-app/SimpleMarketplaceApp/SimpleMarketplaceApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/matth/OneDrive/Desktop/.NET apps/simple-marketplace-app/SimpleMarketplaceApp/SimpleMarketplaceApp/Views/Transactions/TransactionDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhbnNhY3Rpb25zXFRyYW5zYWN0aW9uRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/matth/OneDrive/Desktop/.NET apps/simple-marketplace-app/SimpleMarketplaceApp/SimpleMarketplaceApp/Views/User/EditListing.cshtml]

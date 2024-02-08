@@ -1,15 +1,20 @@
 ﻿@model CatalogueViewModel
 
-<div class="container">
+<div class="catalogue-container">
+    <h1 class="catalogueCategoryHeader">@Model.SelectedCategoryName</h1>
     <div class="row">
         <!-- Categories Sidebar -->
-        <div class="col-md-2">
-            <h3>Categories</h3>
+        <div class="col-md-2 category-list">
             <ul class="list-group">
-                @foreach (var category in Model.Categories)
+                <li class="list-group-item">
+                    <a href="@Url.Action("CatalogueDashboard", "Catalogue", new { selectedCategoryId = 0, pageNumber = 1 })">
+                        All Items
+                    </a>
+                </li>
+                @foreach (var category in Model.Categories.Skip(1)) 
                 {
-                    <li class="list-group-item">
-                        <a href="javascript:void(0);" onclick="loadItems(@category.categoryId)">
+                    <li class="list-group-item @(Model.SelectedCategoryName == category.categoryName ? "active" : "")">
+                        <a href="@Url.Action("CatalogueDashboard", "Catalogue", new { selectedCategoryId = category.categoryId, pageNumber = 1 })">
                             @category.categoryName
                         </a>
                     </li>
@@ -19,11 +24,23 @@
 
         <!-- Items Grid -->
         <div class="col-md-10" id="itemsGrid">
-            <!-- Initially load the items grid with server-side rendered items -->
             @Html.Partial("_ItemsGrid", Model.Items)
         </div>
     </div>
 </div>
+
+<nav aria-label="Catalogue Pagination" id="cataloguePageCounter">
+    <ul class="pagination justify-content-center">
+        @for (int i = 1; i <= Math.Ceiling((double)ViewBag.TotalItems / ViewBag.PageSize); i++)
+        {
+            <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
+                <a class="page-link" href="@Url.Action("CatalogueDashboard", "Catalogue", new { selectedCategoryId = ViewBag.SelectedCategoryId, pageNumber = i })">
+                    @i
+                </a>
+            </li>
+        }
+    </ul>
+</nav>
 
 <script>
     function loadItems(categoryId) {

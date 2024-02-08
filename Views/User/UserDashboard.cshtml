@@ -10,6 +10,9 @@
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" href="#pastListings">Past Listings</a>           
         </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#soldListings">Sold Listings</a>
+    </li>
     </ul>
 
     <div class="tab-content">
@@ -70,7 +73,9 @@
                         <tr>
                             <td>@item.Title</td>
                             <td>@item.Description</td>
-                            <td>@item.CategoryId</td>
+                        <td>
+                            @item.Category?.categoryName
+                        </td>
                             <td>@item.ItemPrice</td>
                             <td>@item.DateListed</td>
                             <td>
@@ -82,6 +87,40 @@
                 </tbody>
             </table>
         </div>
+
+    <div id="soldListings" class="container tab-pane fade">
+        <!-- Sold Listings Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Buyer</th>
+                    <th>Price</th>
+                    <th>Date Listed</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var soldItem in Model.SoldListings)
+                {
+                    <tr>
+                        <td>@soldItem.Item.Title</td>
+                        <td>@soldItem.Item.Description</td>
+                        <td>@soldItem.Item.Category?.categoryName</td>
+                        <td>@soldItem.BuyerUsername</td>  
+                        <td>@soldItem.Item.ItemPrice</td>
+                        <td>@soldItem.Item.DateListed</td>
+                        <td>
+                           
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
     </div>
 
 

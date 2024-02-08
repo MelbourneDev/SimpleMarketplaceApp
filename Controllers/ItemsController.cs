@@ -5,6 +5,7 @@ using SimpleMarketplaceApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace SimpleMarketplaceApp.Controllers
 {
@@ -22,6 +23,8 @@ namespace SimpleMarketplaceApp.Controllers
             _logger = logger;
         }
 
+
+        // Upon page create, fetch the categories to populate the dropdown for the user form.
         [HttpGet]
         public IActionResult ListItem()
         {
@@ -33,49 +36,107 @@ namespace SimpleMarketplaceApp.Controllers
             return View();
         }
 
-        
+
+        // User creates a listing, referencing the relative form in ListItem.cshtml
+        // action has image validation for BLOB storage of files. 
+
         [HttpPost]
-        public async Task<IActionResult> CreateItem(Item item)
+        public async Task<IActionResult> CreateItem(Item item, List<IFormFile> imageFiles)
         {
             _logger.LogInformation("CreateItem POST method called");
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             item.UserId = _userManager.GetUserId(User);
+
             ModelState.Remove("User");
-            ModelState.Remove("Category");            
+            ModelState.Remove("Category");
+
             if (ModelState.IsValid)
             {
-                _logger.LogInformation("if block called");
-                
+                _logger.LogInformation($"Model state is valid. Processing {imageFiles.Count} files.");
+
+                if (imageFiles != null && imageFiles.Count > 0)
+                {
+                    foreach (var file in imageFiles)
+                    {
+                        if (file.Length > 0)
+                        {
+                            _logger.LogInformation($"Processing file: {file.FileName} with size {file.Length} bytes.");
+
+                            using var memoryStream = new MemoryStream();
+                            await file.CopyToAsync(memoryStream);
+                            var imageData = memoryStream.ToArray();
+
+                            var image = new ItemImage
+                            {
+                                ImageData = imageData,
+                                ImageMimeType = file.ContentType,
+                            };
+
+                            item.ItemImages.Add(image);
+                        }
+                        else
+                        {
+                            _logger.LogWarning($"Skipped file: {file.FileName} because it was empty.");
+                        }
+                    }
+                }
+                else
+                {
+                    _logger.LogWarning("No files were uploaded.");
+                }
+
                 item.DateListed = DateTime.Now;
                 _context.Items.Add(item);
 
                 try
                 {
-                    _logger.LogInformation("try block called");
                     await _context.SaveChangesAsync();
                     TempData["ItemName"] = item.Title;
-                    return View("ItemPending"); 
+                    return RedirectToAction("ItemPending");
                 }
-                catch (Exception ex)
+                catch (DbUpdateException ex)
                 {
-                    Console.WriteLine("An error occurred while saving the item: " + ex.Message);
-                    ModelState.AddModelError(string.Empty, "An error occurred while listing the item");
+                    _logger.LogError($"An error occurred while saving the item: {ex.InnerException?.Message}");
+                    ModelState.AddModelError(string.Empty, "An error occurred while listing the item.");
                 }
             }
             else
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                _logger.LogWarning("Model state is invalid. Errors: " + string.Join(", ", errors));
-
-                foreach (var error in errors)
-                {
-                    _logger.LogInformation(error);
-                }
+                _logger.LogWarning($"Model state is invalid. Errors: {string.Join(", ", errors)}");
             }
-            _logger.LogInformation("the end block is called");
+
             ViewBag.Categories = new SelectList(_context.Categories, "categoryId", "categoryName");
             return View("ListItem", item);
         }
 
+
+
+        // Action for RedirecToAction when successfully completeing ListItem form.
+        public IActionResult ItemPending()
+        {
+            return View();
+        }
+
+
+
+        public async Task<IActionResult> GetItemImage(int imageId)
+        {
+            var image = await _context.ItemImages.FindAsync(imageId);
+            if (image != null && image.ImageData != null)
+            {
+                return File(image.ImageData, image.ImageMimeType);
+            }
+            else
+            {
+                
+                return NotFound();
+            }
+        }
 
     }
 }

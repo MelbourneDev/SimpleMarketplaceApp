@@ -1,0 +1,85 @@
+﻿#createItemForm {
+    max-width: 600px; /* Adjust form width */
+    margin: 2em auto; /* Center form on the page */
+    padding: 2em;
+    background: #ffffff; /* Light background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-size: 1rem; /* Base font size */
+}
+
+    #createItemForm label {
+        display: block; /* Ensure labels appear above inputs */
+        margin-bottom: .5em; /* Space below labels */
+        color: #333; /* Dark grey color for text */
+        font-size: 1em;
+        font-weight: 600; /* Make labels slightly bolder */
+    }
+
+    #createItemForm input[type="text"],
+    #createItemForm input[type="number"],
+    #createItemForm select,
+    #createItemForm textarea {
+        width: 100%; /* Full width inputs */
+        padding: 0.5em; /* Padding inside inputs */
+        margin-bottom: 1.5em; /* Space between each field */
+        border: 1px solid #ccc; /* Light border */
+        border-radius: 4px; /* Slightly rounded borders for inputs */
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    #createItemForm button {
+        cursor: pointer;
+        padding: 0.6em 1.2em;
+        background-color: #007bff; /* Bootstrap primary color */
+        color: #ffffff; /* White text */
+        border: none;
+        border-radius: 4px;
+        font-size: 1em;
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+        #createItemForm button:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+        }
+
+
+.form-group {
+    margin-bottom: 1em;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5em;
+    }
+
+#imagePreviews {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 10px;
+    margin-bottom: 1em;
+}
+
+/* Style for each image preview */
+.preview-container {
+    flex-basis: calc(33.333% - 10px);
+    text-align: center;
+}
+
+    .preview-container img {
+        margin: 2em;
+        background-color: rgb(91, 91, 255, .25);
+        width: 100%;
+        height: auto;
+        max-width: 200px;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .preview-container p {
+        margin-top: 1em;
+        font-size: 0.9em;
+        color: #666;
+    }

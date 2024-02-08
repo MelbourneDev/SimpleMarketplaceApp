@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@model SimpleMarketplaceApp.Models.Item
+@using System.Security.Claims
+
+<div class="item-details">
+    <h2>@Model.Title</h2>
+    <div class="main-image-container">
+        @{
+            var firstImage = Model.ItemImages?.FirstOrDefault();
+            if (firstImage != null)
+            {
+                <img id="mainImage" src="@Url.Action("GetItemImage", "Items", new { imageId = firstImage.imageID })" alt="Main Item Image" style="width: 100%; max-width: 600px; height: auto;">
+            }
+            else
+            {
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg" alt="No Image Available" style="width: 100%; max-width: 600px; height: auto;">
+            }
+        }
+    </div>
+    <div class="thumbnails-container">
+        @foreach (var image in Model.ItemImages)
+        {
+            <img class="thumbnail" src="@Url.Action("GetItemImage", "Items", new { imageId = image.imageID })" alt="Thumbnail" onclick="updateMainImage('@Url.Action("GetItemImage", "Items", new { imageId = image.imageID })');" style="width: 100px; height: 100px; object-fit: cover; cursor: pointer; margin-right: 5px;">
+        }
+    </div>
+</div>
+
+    <p>Price: $@Model.ItemPrice</p>
+    <!-- Include more details as necessary -->
+    @{
+        var currentUserId = UserManager.GetUserId(User); // Get current user's ID
+    }
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        <!-- For admin: Show Remove Listing button -->
+        <form asp-action="PullItem" asp-controller="Admin" method="post">
+            <input type="hidden" name="itemId" value="@Model.itemId" />
+            <button type="submit" class="btn btn-warning">Remove Listing</button>
+        </form>
+    }
+
+    @if (!User.IsInRole("Admin") && User.Identity.IsAuthenticated && User.FindFirstValue(ClaimTypes.NameIdentifier) != Model.UserId.ToString())
+    {
+        <form asp-action="CreateTransaction" asp-controller="Transactions" method="post">
+            <input type="hidden" name="itemId" value="@Model.itemId" />
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method</label>
+                <select id="paymentMethod" class="form-control">
+                    <option>Credit Card</option>
+                    <option>Debit Card</option>
+                    <option>PayPal</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Confirm Purchase</button>
+        </form>
+    }
+    else if (User.Identity.IsAuthenticated && currentUserId == Model.UserId.ToString())
+    {
+        <!-- Show Delete Listing button to the seller -->
+        <form asp-action="RemoveListing" asp-controller="User" asp-route-itemId="@Model.itemId" method="post">
+            <button type="submit" class="btn btn-danger">Delete Listing</button>
+        </form>
+    }
+    else if (!User.IsInRole("Admin"))
+    {
+        <a class="btn btn-primary" href="@Url.Action("Login", "Account", new { ReturnUrl = Context.Request.Path + Context.Request.QueryString })">Buy Now</a>
+    }
+</div>
+
+
+<script>
+    function updateMainImage(src) {
+        // This function updates the source of the main image to that of the clicked thumbnail.
+        document.getElementById('mainImage').src = src;
+    }
+</script>

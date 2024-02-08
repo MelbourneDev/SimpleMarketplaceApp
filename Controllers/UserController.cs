@@ -9,6 +9,7 @@ using SimpleMarketplaceApp.Data;
 using System.Diagnostics;
 using SimpleMarketplaceApp.Services.Item;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 
 namespace SimpleMarketplaceApp.Controllers
@@ -38,15 +39,30 @@ namespace SimpleMarketplaceApp.Controllers
                 // Handle user not found
                 return RedirectToAction("Login", "Account");
             }
+
+            var userId = _userManager.GetUserId(User);
+
             var items = _context.Items.Include(item => item.Category).ToList();
             var userItems = await _context.Items
                 .Where(item => item.UserId == currentUser.Id)
                 .ToListAsync();
 
+            var soldItems = await _context.Transactions
+                .Include(t => t.Item)
+                .Include(t => t.Buyer)
+                .Where(t => t.sellerId == userId && t.Item.IsSold)
+                .Select(t => new SoldItemViewModel
+                {
+                    Item = t.Item,
+                    BuyerUsername = t.Buyer.UserName 
+                })
+        .ToListAsync();
+
             var model = new UserDashboardViewModel
             {
-                CurrentListings = userItems.Where(i => !i.IsPastListing), 
-                PastListings = userItems.Where(i => i.IsPastListing)
+                CurrentListings = userItems.Where(i => !i.IsPastListing && !i.IsSold), 
+                PastListings = userItems.Where(i => i.IsPastListing),
+                SoldListings = soldItems,
             };
 
             return View(model);

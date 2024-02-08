@@ -1,6 +1,11 @@
 ﻿@model Item
+@section Css {
+    <link href="~/css/listItemFormPage.css" rel="stylesheet" />
+}
 
-<form asp-action="CreateItem" method="post">
+
+
+<form id="createItemForm" asp-action="CreateItem" method="post" enctype="multipart/form-data">
     <div>
         <label asp-for="Title">Title</label>
         <input asp-for="Title" />
@@ -20,11 +25,52 @@
     </div>
 
     <div>
-        <label asp-for="ItemPrice">Price $</label>
+        <label asp-for="ItemPrice">Price</label>
         <input type="number" asp-for="ItemPrice" />
         <span asp-validation-for="ItemPrice"></span>
     </div>
-   
 
+    <div>
+        <label for="imageFiles">Images:</label>
+        <input type="file" id="imageFiles" name="imageFiles" multiple onchange="handleFiles(this.files)">
+    </div>
+    <div id="imagePreviews"></div>
     <button type="submit">Submit Item for Review</button>
 </form>
+
+<script>
+    let selectedFiles = []; 
+
+    function handleFiles(files) {
+        const previewsContainer = document.getElementById('imagePreviews');
+        Array.from(files).forEach(file => {
+            if (selectedFiles.length < 3) {
+                selectedFiles.push(file); // Add new file to the array
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const previewContainer = document.createElement('div');
+                    previewContainer.classList.add('preview-container');
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.width = '100px';
+                    img.style.height = '100px';
+                    img.style.objectFit = 'cover';
+
+                    const filename = document.createElement('p');
+                    filename.textContent = file.name;
+
+                    previewContainer.appendChild(img);
+                    previewContainer.appendChild(filename);
+                    previewsContainer.appendChild(previewContainer);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Update the file input for form submission
+        const dataTransfer = new DataTransfer();
+        selectedFiles.forEach(file => dataTransfer.items.add(file));
+        document.getElementById('imageFiles').files = dataTransfer.files;
+    }
+</script>

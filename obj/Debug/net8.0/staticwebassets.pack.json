@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\SimpleMarketplaceApp.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\.NET apps\\simple-marketplace-app\\SimpleMarketplaceApp\\SimpleMarketplaceApp\\wwwroot\\css\\forms.css",
+      "PackagePath": "staticwebassets\\css\\forms.css"
+    },
+    {
       "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\.NET apps\\simple-marketplace-app\\SimpleMarketplaceApp\\SimpleMarketplaceApp\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

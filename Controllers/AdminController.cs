@@ -26,19 +26,24 @@ namespace SimpleMarketplaceApp.Controllers
         public async Task<IActionResult>AdminDashboard()
         {
 
-            var pendingItems = await _context.Items.Where(i => i.Status == Models.ApprovalStatus.Pending)
+            var pendingItems = await _context.Items.Where(i => i.Status == Models.ApprovalStatus.Pending && !i.IsSold)
                 .ToListAsync();
 
-            var approvedItems = await _context.Items.Where(i => i.Status == Models.ApprovalStatus.Approved) .ToListAsync();
+            var approvedItems = await _context.Items.Where(i => i.Status == Models.ApprovalStatus.Approved && !i.IsSold) .ToListAsync();
 
-            var rejectedItems = await _context.Items.Where(i => i.Status == Models.ApprovalStatus.Rejected) .ToListAsync();
+            var rejectedItems = await _context.Items.Where(i => i.Status == Models.ApprovalStatus.Rejected && !i.IsSold) .ToListAsync();
+
+            var soldItems = await _context.Items.Where(i => i.IsSold).ToListAsync(); // Fetch sold items
+
+
 
             var model = new DashboardViewModel
 
             {
                 PendingItems = pendingItems,
                 ApprovedItems = approvedItems,
-                RejectedItems = rejectedItems
+                RejectedItems = rejectedItems,
+                SoldItems = soldItems
             };
 
             return View(model);
@@ -104,5 +109,20 @@ namespace SimpleMarketplaceApp.Controllers
             return RedirectToAction("AdminDashboard");
         }
 
+
+        public async Task<IActionResult> ReinstateItemFromSold(int itemId, string activeTab)
+        {
+            var item = await _context.Items.FindAsync(itemId);
+            if (item != null)
+            {
+                item.IsSold = false;
+                item.IsActive = true;
+                item.Status = ApprovalStatus.Approved;
+                await _context.SaveChangesAsync();
+               
+            }
+            TempData["ActiveTab"] = activeTab;
+            return RedirectToAction("AdminDashboard");
+        }
     }
 }

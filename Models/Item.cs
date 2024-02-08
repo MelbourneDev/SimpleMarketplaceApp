@@ -6,6 +6,13 @@ namespace SimpleMarketplaceApp.Models
 {
     public class Item
     {
+
+
+        public Item()
+        {
+            ItemImages = new HashSet<ItemImage>();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int itemId { get; set; }
@@ -33,12 +40,15 @@ namespace SimpleMarketplaceApp.Models
 
         public bool IsActive { get; set; } = false;
 
+        public bool IsSold { get; set; } = false;
+
         // Navigation properties
 
         public virtual User User { get; set; }
        
         public virtual Category Category { get; set; }
-        public virtual ICollection<ItemImage>? ItemImages { get; set; }
+
+        public virtual ICollection<ItemImage> ItemImages { get; set; } = new List<ItemImage>();
 
         public ApprovalStatus Status { get; set; } = ApprovalStatus.Pending; // Default
     }
@@ -49,4 +59,6 @@ namespace SimpleMarketplaceApp.Models
         Approved,
         Rejected
     }
+
+    
 }

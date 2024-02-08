@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static System.Net.WebRequestMethods;
 
 namespace SimpleMarketplaceApp.Models
 {
@@ -12,14 +13,14 @@ namespace SimpleMarketplaceApp.Models
         [ForeignKey("itemId")]
         public int itemID { get; set; } // FK to Item
 
-        [Required]
-        public string Title { get; set; } // This is just a regular property
+     
+        // Property to store the binary data of the image
+        public byte[] ImageData { get; set; }
 
-        [Required]
-        public string imageURL { get; set; }
+        // Property to store the MIME type of the image
+        public string ImageMimeType { get; set; }
 
         // Navigation property to the Item model
-        [Required]
         public virtual Item Item { get; set; }
     }
 

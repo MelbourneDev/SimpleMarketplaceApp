@@ -1,0 +1,13 @@
+﻿@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<h2>Transaction Details</h2>
+<!-- Display transaction details here -->
+<p>Item: @Model.Item.Title</p>
+<p>Seller: @Model.Seller.UserName</p>
+<p>Price: $@Model.transactionAmount</p>
+<p>Date: @Model.transactionDate.ToString("g")</p>
