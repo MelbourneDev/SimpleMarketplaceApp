@@ -27,84 +27,66 @@
         font-family: "Poppins", sans-serif;
     }
 
-@media screen and (min-width: 1920px) {
+@media screen and (min-width: 1080px) {
 
-    /*Registration Page*/
-    .registrationPageGrid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: .1em;
-        
+  /*NAVS*/
+  /*GUEST NAV*/
+
+
+    .generic-links {
+        margin-top: .1rem;
+        margin-bottom: .1rem;
+        margin-left: 5em;
+        display: flex;
+        justify-content: flex-end;
+        gap: 2em;
     }
 
-   
-
-    .validationHelp {
-        height: 30em;
-        width: 60%;
-        margin: 0 auto;
-        margin-top: 10em;
-        text-align: center;
-        padding: 1em;
-        background: rgba(255, 255, 255, 0.5);
-        border-style: solid;
-        border-width: .1em;
-        border-radius: 5%;
-        box-shadow: .5em .5em 0px 0px #a0a0a0;
+    .nav-item-home a,
+    .nav-item-catalogue a {
+        padding: 0.5rem 1rem;
+        border-radius: 5em;
+        transition: background-color 0.3s ease;
+        border: solid 1px;
+        border-color: #FFFFFF;
     }
 
-        .validationHelp h1 {
-        font-size:1.2em;
-        font-weight:400;
-        
-    }
-
-        .validationHelp ul{
-            text-align:left;
+        .nav-item-home a:hover,
+        .nav-item-catalogue a:hover {
+            background-color: #f0f0f0;
+            border: solid 1px;
+            border-color: #568DE5;
         }
 
-
-/*Login Form Page*/
-
-
- 
-
-
-
-        /*Catalogue Page*/
-
-    #itemsGrid {
-        background-color: rgb(91, 91, 255, .5);
-        padding: 1.5em, 2em;
-        margin-top: 5em;
-        justify-content: space-between;
+    .auth-links {
+        margin-top: .1rem;
+        margin-bottom: .1rem;
+        margin-right: 5em;
+        display: flex;
+        justify-content: flex-end;
+        gap: 2em;
     }
+    .nav-item-register a,
+    .nav-item-login a
+{
+    padding: 0.5rem 1rem;
+    border-radius: 5em;
+    transition: background-color 0.3s ease;
+    border: solid 1px;
+    border-color: #FFFFFF;
+}
 
-    .list-group-item {
-        color: rgb(91, 91, 255, .55);
-    }
+.nav-item-register a:hover,
+.nav-item-login a:hover {
+    background-color: #f0f0f0;
+    border: solid 1px;
+    border-color: #568DE5;
+}
 
-    #individualItemGrid {
-        border: solid;
-        background-color: rgb(91, 91, 255, .15);
-        padding: 1em;
-        align-items: center;
-    }
-
-    .card {
-        margin: 1em;
-        background-color: rgb(91, 91, 255, .35);
-    }
-
-    .carousel-item {
-        transition: transform 0.2s ease-in-out;
-        background-color: white;
-    }
-  
 
     /*ItemDetails Page*/
-    .detailsItemListingTitle{
-        text-decoration:underline;
+    .detailsItemListingTitle {
+        text-decoration: underline;
     }
 
     .item-details {
@@ -125,14 +107,14 @@
     }
 
     .thumbnail {
-        transition: transform 0.2s; /* Animation */
+        transition: transform 0.2s;
         margin: 0 5px;
     }
 
-    .thumbnail:hover {
-            transform: scale(1.1); /* Slightly enlarge thumbnails on hover */
+        .thumbnail:hover {
+            transform: scale(1.1);
             opacity: 0.8;
-    }
+        }
 
     #cataloguePageCounter {
         margin: 1em;
@@ -144,14 +126,16 @@
     .pagination li {
         margin-right: 5px;
     }
-  .catalogueCategoryHeader{
-            margin-left: 20em;
-  }
+
+    .catalogueCategoryHeader {
+        margin-left: 20em;
+    }
 
     .category-list .list-group-item.active {
-        font-weight: bold; 
-        background-color: transparent; 
-        border-left: 5px solid #007bff; 
+        font-weight: bold;
+        background-color: transparent;
+        border-left: 5px solid #007bff;
     }
+
     /*End of Media Query 1920px > */
 }

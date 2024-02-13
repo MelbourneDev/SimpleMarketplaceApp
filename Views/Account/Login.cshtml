@@ -1,9 +1,66 @@
 ﻿@model LoginViewModel
-<form asp-action="Login" id="userLoginForm" method="post">
-    <div asp-validation-summary="All"></div>
-    <label asp-for="UserName" >username</label><br />
-    <input asp-for="UserName" id="formInput" placeholder="enter username..." /><br />
-    <label asp-for="Password">password</label><br />
-    <input asp-for="Password" type="password" id="formInput" placeholder="enter password..." /><br />
-    <button type="submit" id="loginFormSubmissionButtons">Login</button>
-</form>
+
+@section Css {
+    <link href="~/css/loginFormPage.css" rel="stylesheet" />
+}
+
+<div class="loginPageContainer">
+    <div class="loginFormContainer">
+        <h2 class="loginWelcome">Welcome Back!</h2>
+        <p class="loginWelcomeText">Get back to the easiest way to buy and sell preloved items</p>
+
+        <form id="loginForm" asp-action="Login" method="post" class="login-form">
+            <div asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="UserName">Username</label>
+                <input asp-for="UserName" class="form-control" placeholder="Enter username...">
+            </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <div class="input-group">
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter password..." id="Password">
+                    <div class="input-group-append">
+                        <span class="input-group-text" onclick="togglePasswordVisibility()">
+                            <i id="togglePasswordIcon" class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row align-items-center">
+                <div class="col text-left">
+                    <div class="form-check remember-me">
+                        <input class="form-check-input" type="checkbox" id="RememberMe" asp-for="RememberMe">
+                        <label class="form-check-label" for="RememberMe">Remember Me</label>
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <button type="submit" class="btn btn-primary login-button">Login</button>
+                </div>
+            </div>
+        </form>
+
+
+
+    </div>
+    <div class="imageContainer">
+        <div class="imageText">
+            Need money?<br /> Looking to buy unwanted items?<br /> One persons trash is another persons treasure.
+        </div>
+    <img class="loginFormHeroImage" src="/site_images/loginFormHeroImage.svg" alt="Decorative image">
+    </div>
+</div>
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("Password");
+        var toggleIcon = document.getElementById("togglePasswordIcon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+        }
+    }
+</script>

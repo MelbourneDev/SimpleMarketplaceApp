@@ -1,32 +1,50 @@
 ﻿@model CatalogueViewModel
 
+@section Css {
+    <link href="~/css/Catalogue.css" rel="stylesheet" />
+}
+
+
+    <h1 class="catalogueCategoryHeader">@Model.SelectedCategoryName</h1><br />
 <div class="catalogue-container">
-    <h1 class="catalogueCategoryHeader">@Model.SelectedCategoryName</h1>
-    <div class="row">
-        <!-- Categories Sidebar -->
-        <div class="col-md-2 category-list">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="@Url.Action("CatalogueDashboard", "Catalogue", new { selectedCategoryId = 0, pageNumber = 1 })">
-                        All Items
-                    </a>
-                </li>
-                @foreach (var category in Model.Categories.Skip(1)) 
-                {
-                    <li class="list-group-item @(Model.SelectedCategoryName == category.categoryName ? "active" : "")">
-                        <a href="@Url.Action("CatalogueDashboard", "Catalogue", new { selectedCategoryId = category.categoryId, pageNumber = 1 })">
-                            @category.categoryName
-                        </a>
-                    </li>
-                }
-            </ul>
+
+        <!-- Filter Sidebar -->
+        <div class="filterSideBar">        
+            
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Category
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="categoryDropdownMenuButton">
+                        <a class="dropdown-item" href="@Url.Action("CatalogueDashboard", "Catalogue", new { selectedCategoryId = 0, pageNumber = 1 })">All Items</a>
+                        @foreach (var category in Model.Categories.Skip(1))
+                        {
+                            <a class="dropdown-item" href="@Url.Action("CatalogueDashboard", "Catalogue", new { selectedCategoryId = category.categoryId, pageNumber = 1 })">@category.categoryName</a>
+                        }
+                    </div>
+                </div>
+                <hr />
+                <div class="price-range-filter">
+                    <input type="number"  name="minPrice" placeholder="Min $" id="minPrice">
+                    <input type="number"  name="maxPrice" placeholder="Max $" id="maxPrice">
+                    <button id="applyFiltersBtn">Apply Price Filter</button>
+        </div>
+        <hr />
+        <div class="search-filter">
+            <input type="text" id="searchTerm" placeholder="Search items...">
+            <button id="searchBtn">Search</button>
+        </div>
+        <hr />
+
+        <button id="resetFiltersBtn">Reset Filters</button>
+
         </div>
 
         <!-- Items Grid -->
-        <div class="col-md-10" id="itemsGrid">
+        <div id="itemsGrid">
             @Html.Partial("_ItemsGrid", Model.Items)
         </div>
-    </div>
+    
 </div>
 
 <nav aria-label="Catalogue Pagination" id="cataloguePageCounter">
@@ -43,20 +61,31 @@
 </nav>
 
 <script>
-    function loadItems(categoryId) {
-        let url = '@Url.Action("GetItemsByCategory", "Catalogue")';
-        $.ajax({
-            type: "GET",
-            url: url,
-            data: { categoryId: categoryId },
-            success: function (response) {
-                $('#itemsGrid').html(response);
-            },
-            error: function (xhr, status, error) {
-                console.error("AJAX Error:", status, error);
+
+        $(document).ready(function () {
+            // Adjusted function to dynamically get the selected category ID from the URL or a selected element
+            function applyFilters() {
+                let selectedCategoryId = '@ViewBag.SelectedCategoryId' || 0; // Fallback to 0 (All Items) if not set
+                let minPrice = $('#minPrice').val();
+                let maxPrice = $('#maxPrice').val();
+
+                let url = '@Url.Action("CatalogueDashboard", "Catalogue")' + `?selectedCategoryId=${selectedCategoryId}&minPrice=${minPrice}&maxPrice=${maxPrice}&pageNumber=1`;
+
+                window.location.href = url; // Redirect to the updated URL with filters
             }
+
+            // Optionally, bind the applyFilters function to the button click event if inline `onclick` is not preferred
+            $('#applyFiltersBtn').click(applyFilters);
         });
-    }
+    $('#resetFiltersBtn').click(function () {
+        window.location.href = '@Url.Action("CatalogueDashboard", "Catalogue", new { selectedCategoryId = 0, pageNumber = 1 })';
+    });
+    $('#searchBtn').click(function () {
+        let searchTerm = $('#searchTerm').val();
+        let url = '@Url.Action("CatalogueDashboard", "Catalogue")' + `?searchTerm=${searchTerm}`;
+        window.location.href = url;
+    });
+
 </script>
 
 

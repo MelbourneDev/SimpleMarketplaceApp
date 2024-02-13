@@ -22,7 +22,7 @@ namespace SimpleMarketplaceApp.Controllers
 
         }
 
-        public async Task<IActionResult> CatalogueDashboard(int? selectedCategoryId = null, int pageNumber = 1, int pageSize = 9)
+        public async Task<IActionResult> CatalogueDashboard(int? selectedCategoryId = null, decimal? minPrice = null, decimal? maxPrice = null, int pageNumber = 1, int pageSize = 9, string searchTerm = "")
         {
             _logger.LogInformation("Loading CatalogueDashboard");
 
@@ -40,7 +40,18 @@ namespace SimpleMarketplaceApp.Controllers
             {
                 itemsQuery = itemsQuery.Where(i => i.CategoryId == selectedCategoryId);
             }
-
+            if (minPrice.HasValue)
+            {
+                itemsQuery = itemsQuery.Where(i => i.ItemPrice >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                itemsQuery = itemsQuery.Where(i => i.ItemPrice <= maxPrice.Value);
+            }
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                itemsQuery = itemsQuery.Where(i => EF.Functions.Like(i.Title, $"%{searchTerm}%"));
+            }
             // Calculate total items for pagination
             var totalItems = await itemsQuery.CountAsync();
             var items = await itemsQuery.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();

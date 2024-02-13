@@ -1,0 +1,111 @@
+﻿
+/*Catalogue Page*/
+
+.catalogue-container{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-gap:2em;
+
+}
+
+.filterSideBar {
+    
+    
+}
+#minPrice, #maxPrice, #searchTerm {
+    width: 100%;
+    padding: 0.75em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+#applyFiltersBtn, #resetFiltersBtn, #searchBtn {
+    width: 100%;
+    padding: 0.75em;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#applyFiltersBtn, #searchBtn {
+    margin-bottom: .2em;
+    background-color: #38c930;
+}
+    .list-group-item {
+    color: rgb(91, 91, 255, .55);
+}
+.list-group-item {
+    border-radius: 1em;
+    padding: 1em;
+    margin: .1em;
+}
+
+
+#itemsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5%;
+}
+#itemsGrid .row {
+        width: 100%; 
+        margin-right: 0;
+        margin-left: 0;
+}
+
+.individualItemGrid {
+    flex: 0 0 30%;
+    max-width: 30%;
+    
+}
+card-body {
+    border: solid 2px;
+}
+.card {
+    margin: 1em;
+    background-color: rgb(91, 91, 255, .35);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+}
+.card-body {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+
+.carousel-item {
+    transition: transform 0.0s ease-in-out;
+    background-color: white;
+}
+
+
+
+#cataloguePageCounter {
+    margin: 1em;
+    margin-left: 13em;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.pagination li {
+    margin-right: 5px;
+}
+
+.catalogueCategoryHeader {
+    margin-left: 20em;
+}
+
+.category-list .list-group-item.active {
+    font-weight: bold;
+    background-color: transparent;
+    border-left: 5px solid #007bff;
+}

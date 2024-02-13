@@ -5,8 +5,20 @@
       "PackagePath": "staticwebassets\\SimpleMarketplaceApp.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\.NET apps\\simple-marketplace-app\\SimpleMarketplaceApp\\SimpleMarketplaceApp\\wwwroot\\css\\forms.css",
-      "PackagePath": "staticwebassets\\css\\forms.css"
+      "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\.NET apps\\simple-marketplace-app\\SimpleMarketplaceApp\\SimpleMarketplaceApp\\wwwroot\\css\\Catalogue.css",
+      "PackagePath": "staticwebassets\\css\\Catalogue.css"
+    },
+    {
+      "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\.NET apps\\simple-marketplace-app\\SimpleMarketplaceApp\\SimpleMarketplaceApp\\wwwroot\\css\\listItemFormPage.css",
+      "PackagePath": "staticwebassets\\css\\listItemFormPage.css"
+    },
+    {
+      "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\.NET apps\\simple-marketplace-app\\SimpleMarketplaceApp\\SimpleMarketplaceApp\\wwwroot\\css\\loginFormPage.css",
+      "PackagePath": "staticwebassets\\css\\loginFormPage.css"
+    },
+    {
+      "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\.NET apps\\simple-marketplace-app\\SimpleMarketplaceApp\\SimpleMarketplaceApp\\wwwroot\\css\\registrationFormPage.css",
+      "PackagePath": "staticwebassets\\css\\registrationFormPage.css"
     },
     {
       "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\.NET apps\\simple-marketplace-app\\SimpleMarketplaceApp\\SimpleMarketplaceApp\\wwwroot\\css\\site.css",
@@ -247,6 +259,10 @@
     {
       "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\.NET apps\\simple-marketplace-app\\SimpleMarketplaceApp\\SimpleMarketplaceApp\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\matth\\OneDrive\\Desktop\\.NET apps\\simple-marketplace-app\\SimpleMarketplaceApp\\SimpleMarketplaceApp\\wwwroot\\site_images\\loginFormHeroImage.svg",
+      "PackagePath": "staticwebassets\\site_images\\loginFormHeroImage.svg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SimpleMarketplaceApp.Microsoft.AspNetCore.StaticWebAssets.props",

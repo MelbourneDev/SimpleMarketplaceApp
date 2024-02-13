@@ -1,0 +1,146 @@
+﻿@media screen and (min-width: 1080px) {
+    .container, body, html {
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+ 
+        min-width: 100%;
+        padding: 0;
+    }
+
+
+
+    .registrationPageContainer {
+        display: grid;
+        grid-template-columns: 70% 30%;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 0rem;
+        height: 100vh;
+        width: 100%;
+    }
+
+    .registrationFormContainer {
+        width: 30em;
+        margin-left: 25em;
+        margin-bottom:5em;
+        height: auto;
+        padding: 2em;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+       
+    }
+
+    .registrationWelcome
+    {
+        margin-bottom: 1em;
+        color: #333;
+    }
+
+
+    #registrationForm {
+        font-size: 1rem;
+        
+    }
+
+        #registrationForm label {
+            display: block;
+            margin-bottom: 0.5em;
+            color: #333;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        #registrationForm input[type="text"],
+        #registrationForm input[type="password"],
+        #registrationForm input[type="email"],
+        #registrationForm input[type="number"] {
+            width: 100%;
+            padding: 0.75em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+    #registrationFormButton {
+        width: 100%;
+        padding: 0.75em;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        #registrationFormButton:hover {
+            background-color: #0056b3;
+        }
+
+
+
+    .validationCol {
+        position: relative;
+        margin-bottom: 3em;
+        height: 100%;
+        width: 100%;
+      
+    }
+
+    .validationHelp {
+        height: 20em;
+        width: 100%;
+        margin-top: 50%;
+        right: 20em;
+        text-align: left;
+        padding: 1em;
+        background: #ffffff;
+        border-radius: 0em 8em 0em 8em;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        position: absolute;
+        background: #ffffff;
+        font-weight: 600;
+    }
+
+        .validationHelp h1 {
+            font-size: 1em;
+            font-weight: 400;
+        }
+
+        .validationHelp ul {
+            text-align: left;
+        }
+
+   .ageValidation {
+        text-align: center;
+    }
+
+    .ageValidation span[class='16'] {
+        text-decoration: underline;
+    }
+
+
+    .validationDecoration {
+        position: absolute;
+        width: 100%;
+        height: 52%;
+        margin-top: 12em;
+        right: 20em;
+        border-radius: 0% 47% 45% 59% / 37% 49% 0% 48%;
+        background: linear-gradient(90deg, hsla(225, 40%, 54%, 1) 0%, hsla(284, 75%, 54%, 1) 100%);
+        z-index: -1;
+        
+    }
+}
+
+
+
+
+
